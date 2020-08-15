@@ -1,0 +1,4 @@
+{
+    "python.formatting.provider": "black",
+    "python.pythonPath": "C:\\Users\\sigma\\scoop\\apps\\python\\current\\python.exe"
+}
