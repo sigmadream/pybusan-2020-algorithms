@@ -19,7 +19,7 @@ class Perf(object):
             time = average / conversion
             print(f"Time Elapsed: {time:.3f} {self.unit}")
             if self.message is not None:
-                print("f{self.message}")
+                print(f"{self.message}")
             return rv
 
         return wrapper_timer
