@@ -225,6 +225,11 @@ def main(win, width):
                             spot.update_neighbors(grid)
                     algorithm(lambda: draw(win, grid, ROWS, width), grid, start, end)
 
+                if event.key == pygame.K_c:  # 키보드 c
+                    start = None
+                    end = None
+                    grid = make_grid(ROWS, width)
+
     pygame.quit()
 
 
