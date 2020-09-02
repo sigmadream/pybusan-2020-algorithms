@@ -2,6 +2,8 @@ from typing import Counter
 import pygame
 from queue import PriorityQueue
 
+from pygame import draw
+
 WIDTH = 800
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* 알고리즘!")
@@ -101,6 +103,13 @@ def h(p1, p2):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
+def shortest_path(came_from, current, draw):
+    while current in came_from:
+        current = came_from[current]
+        current.make_path()
+        draw()
+
+
 def algorithm(draw, grid, start, end):
     count = 0
     open_set = PriorityQueue()
@@ -117,6 +126,7 @@ def algorithm(draw, grid, start, end):
         open_set_hash.remove(current)
 
         if current == end:
+            shortest_path(came_from, end, draw)
             end.make_end()
             return True
 
@@ -124,6 +134,7 @@ def algorithm(draw, grid, start, end):
             temp_g_score = g_score[current] + 1
 
             if temp_g_score < g_score[neighbor]:
+                came_from[neighbor] = current
                 g_score[neighbor] = temp_g_score
                 f_score[neighbor] = temp_g_score + h(neighbor.get_pos(), end.get_pos())
                 if neighbor not in open_set_hash:
